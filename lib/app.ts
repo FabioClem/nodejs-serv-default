@@ -36,9 +36,12 @@ class App {
 
     public wsConfig() {
 
-        const wss = new WebSocket.Server({ port: 3001 });
+        const p: number = 3001;
+
+        const wss = new WebSocket.Server({ port: p });
 
         wss.on('connection', (ws: WebSocket) => {
+
 
             //connection is up, let's add a simple simple event
             ws.on('message', (message: string) => {
@@ -49,7 +52,9 @@ class App {
             });
 
             //send immediatly a feedback to the incoming connection    
-            ws.send('Hi there, I am a WebSocket server');
+            // ws.send('Hi there, I am a WebSocket server');
+            console.log("WS conectado na porta: " + p);
+
         });
     }
 }
