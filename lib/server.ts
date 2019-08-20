@@ -1,6 +1,5 @@
 import app from './app';
-const PORT = 3000;
-
-app.listen(PORT, () => {
-    console.log('Servidor on, na porta: ' + PORT);
+import _ = require("./config/config");
+app.listen(_.SeverConfig.servPORT, () => {
+    console.log('Servidor on, na porta: ' + _.SeverConfig.servPORT);
 });

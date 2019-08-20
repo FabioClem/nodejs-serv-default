@@ -6,12 +6,17 @@ import * as mongoose from "mongoose";
 import * as WebSocket from 'ws';
 
 import * as http from 'http';
+// import { SeverConfig } from "config/config";
+
+import _ = require("./config/config");
 
 class App {
 
     public app: express.Application = express();
     public routePrv: Routes = new Routes();
-    public mongoUrl: string = 'mongodb://localhost:27017/CRMdb';
+    // public mongoUrl: string = 'mongodb://localhost:27017/CRMdb';
+
+    public mongoUrl: string = _.SeverConfig.databaseLink;
 
     public serv = http.createServer(this.app);
 
@@ -35,26 +40,17 @@ class App {
     }
 
     public wsConfig() {
-
-        const p: number = 3001;
-
-        const wss = new WebSocket.Server({ port: p });
-
+        const wss = new WebSocket.Server({ port: _.SeverConfig.wsPORT });
         wss.on('connection', (ws: WebSocket) => {
-
-
             //connection is up, let's add a simple simple event
             ws.on('message', (message: string) => {
-
                 //log the received message and send it back to the client
-                console.log('received: %s', message);
-                ws.send(`Hello, you sent -> ${message}`);
+                console.log('Recebido: %s', message);
+                ws.send(`Você mandou -> ${message}`);
             });
-
             //send immediatly a feedback to the incoming connection    
             // ws.send('Hi there, I am a WebSocket server');
-            console.log("WS conectado na porta: " + p);
-
+            console.log("WS conectado na porta: " + _.SeverConfig.wsPORT);
         });
     }
 }
