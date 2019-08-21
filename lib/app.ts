@@ -6,7 +6,6 @@ import * as mongoose from "mongoose";
 import * as WebSocket from 'ws';
 
 import * as http from 'http';
-// import { SeverConfig } from "config/config";
 
 import _ = require("./config/config");
 
@@ -30,7 +29,6 @@ class App {
     private config(): void {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        // serving static files 
         this.app.use(express.static('public'));
     }
 

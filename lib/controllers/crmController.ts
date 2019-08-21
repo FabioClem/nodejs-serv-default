@@ -52,4 +52,10 @@ export class ContactController {
         });
     }
 
+    public test(n1: number, n2: number) {
+        let s: number;
+        s = n1 + n2;
+        return s;
+    }
+
 }

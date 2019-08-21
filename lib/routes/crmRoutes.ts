@@ -3,7 +3,7 @@ import { ContactController } from "../controllers/crmController";
 
 export class Routes {
 
-    public contactController: ContactController = new ContactController()
+    public contactController: ContactController = new ContactController();
 
     public routes(app): void {
 
@@ -11,9 +11,9 @@ export class Routes {
             .get((req: Request, res: Response) => {
                 res.status(200)
                     .send({
-                        message: 'GET request successfulll!!!!'
-                    })
-            })
+                        message: 'Sucesso'
+                    });
+            });
 
         // Contact 
         app.route('/contact')
