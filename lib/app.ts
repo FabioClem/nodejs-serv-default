@@ -1,19 +1,24 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import { Routes } from "./routes/crmRoutes";
 import * as mongoose from "mongoose";
-
 import * as WebSocket from 'ws';
-
 import * as http from 'http';
 
+// Arquivo de configuração, contendo infos do sistema como portas e links.
 import _ = require("./config/config");
+
+
+// Imports das rotas existentes no sistema.
+import { CheckRoutes } from "./routes/check.routes";
+import { CrmRoutes } from "./routes/crm.routes";
 
 class App {
 
     public app: express.Application = express();
-    public routePrv: Routes = new Routes();
-    // public mongoUrl: string = 'mongodb://localhost:27017/CRMdb';
+
+    public crmRoutes: CrmRoutes = new CrmRoutes();
+    public checkRoutes: CheckRoutes = new CheckRoutes();
+
 
     public mongoUrl: string = _.SeverConfig.databaseLink;
 
@@ -23,7 +28,8 @@ class App {
         this.config();
         this.mongoSetup();
         this.wsConfig();
-        this.routePrv.routes(this.app);
+        this.crmRoutes.routes(this.app);
+        this.checkRoutes.routes(this.app);
     }
 
     private config(): void {

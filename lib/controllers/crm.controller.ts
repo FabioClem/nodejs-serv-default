@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
-import { ContactSchema } from '../models/crmModel';
 import { Request, Response } from 'express';
+import { ContactSchema } from '../models/crm.model';
 
 const Contact = mongoose.model('Contact', ContactSchema);
 

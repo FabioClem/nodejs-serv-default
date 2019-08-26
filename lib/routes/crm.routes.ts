@@ -1,21 +1,14 @@
 import { Request, Response, NextFunction } from "express";
-import { ContactController } from "../controllers/crmController";
+import { ContactController } from "../controllers/crm.controller";
 
-export class Routes {
+export class CrmRoutes {
 
     public contactController: ContactController = new ContactController();
 
     public routes(app): void {
-
-        app.route('/')
-            .get((req: Request, res: Response) => {
-                res.status(200)
-                    .send({
-                        message: 'Sucesso'
-                    });
-            });
-
-        // Contact 
+        /**
+         * 
+         */
         app.route('/contact')
             .get((req: Request, res: Response, next: NextFunction) => {
                 next();
@@ -24,7 +17,12 @@ export class Routes {
 
         // Contact detail
         app.route('/contact/:contactId')
-            .get(this.contactController.getContactWithID)
+            .get((req: Request, res: Response, next: NextFunction) => {
+
+
+
+                next();
+            }, this.contactController.getContactWithID)
             .put(this.contactController.updateContact)
             .delete(this.contactController.deleteContact)
     }
